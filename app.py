@@ -365,6 +365,8 @@ def initialize_database():
             print('Default admin created: admin_abdulilah@istinye.edu.tr / Admin@123')
 
 
-if __name__ == '__main__':
+with app.app_context():
     initialize_database()
+
+if __name__ == '__main__':
     app.run(debug=True)
