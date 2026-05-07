@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - Istinye University{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <h2 style="color: var(--istinye-dark-blue);">
+            <i class="fas fa-graduation-cap me-2"></i>Student Dashboard
+        </h2>
+        <p class="text-muted">Welcome, {{ current_user.full_name }}</p>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-4">
+        <div class="card card-istinye mb-4">
+            <div class="card-header">
+                <i class="fas fa-user-circle me-2"></i>My Profile
+            </div>
+            <div class="card-body">
+                <p><strong>Full Name:</strong><br>{{ current_user.full_name }}</p>
+                <p><strong>Username:</strong><br>{{ current_user.username }}</p>
+                <p><strong>Email:</strong><br>{{ current_user.email }}</p>
+                <p><strong>Department:</strong><br>{{ current_user.department }}</p>
+
+                <hr>
+
+                <p class="text-muted small mb-2">
+                    <i class="fas fa-lock text-warning"></i>
+                    <strong>Decrypted Personal Data:</strong>
+                </p>
+
+                <p><strong>National ID:</strong><br>
+                    <code>{{ profile.national_id }}</code>
+                </p>
+                <p><strong>Phone:</strong><br>
+                    <code>{{ profile.phone }}</code>
+                </p>
+
+                <div class="alert alert-info small mb-0">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Your personal data is encrypted in the database and decrypted only for your view.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card card-istinye">
+            <div class="card-header">
+                <i class="fas fa-clipboard-list me-2"></i>My Grades
+                <span class="badge bg-light text-dark ms-2">{{ grades|length }} courses</span>
+            </div>
+            <div class="card-body">
+                {% if grades %}
+                    <table class="table table-hover">
+                        <thead style="background-color: var(--istinye-light);">
+                            <tr>
+                                <th>Course</th>
+                                <th>Teacher</th>
+                                <th class="text-center">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for g in grades %}
+                            <tr>
+                                <td>
+                                    <i class="fas fa-book me-1" style="color: var(--istinye-turquoise);"></i>
+                                    {{ g.course }}
+                                </td>
+                                <td>
+                                    <i class="fas fa-chalkboard-teacher me-1 text-muted"></i>
+                                    {{ g.teacher }}
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-student" style="font-size: 14px;">
+                                        {{ g.grade }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-warning small mt-3 mb-0">
+                        <i class="fas fa-shield-alt me-1"></i>
+                        <strong>Security:</strong> All grades are stored encrypted using Fernet (AES) and decrypted upon display.
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No grades have been recorded yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

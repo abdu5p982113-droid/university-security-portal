@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Istinye University Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card card-istinye mt-4">
+            <div class="card-header text-center py-3">
+                <i class="fas fa-sign-in-alt me-2"></i>Sign In to Your Account
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-envelope me-1"></i>Email Address
+                        </label>
+                        <input type="email" name="email" class="form-control" required
+                               placeholder="your.email@istinye.edu.tr">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-lock me-1"></i>Password
+                        </label>
+                        <input type="password" name="password" class="form-control" required
+                               placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-istinye w-100 py-2">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </button>
+                </form>
+
+                <hr class="my-4">
+
+                <p class="text-center text-muted mb-0">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}" style="color: var(--istinye-turquoise); font-weight: 500;">
+                        Register here
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-3">
+            <small>
+                <i class="fas fa-info-circle me-1"></i>
+                <strong>Security Note:</strong> Your password is securely hashed and never stored in plain text.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
