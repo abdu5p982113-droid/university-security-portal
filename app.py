@@ -360,28 +360,37 @@ def delete_user(user_id):
     return redirect(url_for('admin_dashboard'))
 
 
-def initialize_database():
-    with app.app_context():
-        db.create_all()
+@app.route('/admin/security-view')
+@role_required('admin')
+def security_view():
+    all_users = User.query.all()
+    all_grades = Grade.query.all()
 
-        if not User.query.filter_by(role='admin').first():
-            default_admin = User(
-                username='admin',
-                email='admin_abdulilah@istinye.edu.tr',
-                full_name='Abdulilah Admin',
-                department='IT Administration',
-                role='admin',
-                national_id_encrypted=encrypt_data('00000000000'),
-                phone_encrypted=encrypt_data('+90 000 000 0000')
-            )
-            default_admin.set_password('Admin@123')
-            db.session.add(default_admin)
-            db.session.commit()
-            print('Default admin created: admin_abdulilah@istinye.edu.tr / Admin@123')
+    users_comparison = []
+    for u in all_users:
+        users_comparison.append({
+            'id': u.id,
+            'username': u.username,
+            'email': u.email,
+            'full_name': u.full_name,
+            'role': u.role,
+            'password_hash_raw': u.password_hash,
+            'national_id_decrypted': u.get_national_id(),
+            'national_id_raw': u.national_id_encrypted,
+            'phone_decrypted': u.get_phone(),
+            'phone_raw': u.phone_encrypted
+        })
 
+    grades_comparison = []
+    for g in all_grades:
+        grades_comparison.append({
+            'id': g.id,
+            'student_name': g.student.full_name,
+            'course': g.course_name,
+            'grade_decrypted': g.get_grade(),
+            'grade_raw': g.grade_encrypted
+        })
 
-with app.app_context():
-    initialize_database()
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return render_template('security_view.html',
+                           users=users_comparison,
+                           grades=grades_comparison)
