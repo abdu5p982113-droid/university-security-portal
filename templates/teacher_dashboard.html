@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Teacher Dashboard - Istinye University{% endblock %}
+{% block title %}Teacher Dashboard - Abdulilah University{% endblock %}
 
 {% block content %}
 <div class="row mt-4">
     <div class="col-12">
-        <h2 style="color: var(--istinye-dark-blue);">
-            <i class="fas fa-chalkboard-teacher me-2"></i>Teacher Dashboard
-        </h2>
+        <h2 style="color: var(--istinye-dark-blue);">Teacher Dashboard</h2>
         <p class="text-muted">Welcome, {{ current_user.full_name }}</p>
     </div>
 </div>
@@ -15,9 +13,7 @@
 <div class="row mt-3">
     <div class="col-md-5">
         <div class="card card-istinye">
-            <div class="card-header">
-                <i class="fas fa-plus-circle me-2"></i>Add New Grade
-            </div>
+            <div class="card-header">Add New Grade</div>
             <div class="card-body">
                 <form method="POST" action="{{ url_for('add_grade') }}">
                     <div class="mb-3">
@@ -25,9 +21,7 @@
                         <select name="student_id" class="form-select" required>
                             <option value="">-- Choose a student --</option>
                             {% for s in students %}
-                            <option value="{{ s.id }}">
-                                {{ s.full_name }} ({{ s.username }})
-                            </option>
+                            <option value="{{ s.id }}">{{ s.full_name }} ({{ s.username }})</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -39,19 +33,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">
-                            Grade
-                            <span class="badge bg-warning text-dark">
-                                <i class="fas fa-lock"></i> Will be encrypted
-                            </span>
-                        </label>
+                        <label class="form-label">Grade</label>
                         <input type="text" name="grade" class="form-control"
                                placeholder="e.g. A, 85, Pass" required>
                     </div>
 
-                    <button type="submit" class="btn btn-istinye w-100">
-                        <i class="fas fa-save me-2"></i>Save Grade (Encrypted)
-                    </button>
+                    <button type="submit" class="btn btn-istinye w-100">Save Grade</button>
                 </form>
             </div>
         </div>
@@ -60,7 +47,7 @@
     <div class="col-md-7">
         <div class="card card-istinye">
             <div class="card-header">
-                <i class="fas fa-list me-2"></i>Grades I Recorded
+                Grades I Recorded
                 <span class="badge bg-light text-dark ms-2">{{ grades|length }}</span>
             </div>
             <div class="card-body">
@@ -76,28 +63,17 @@
                         <tbody>
                             {% for g in grades %}
                             <tr>
-                                <td>
-                                    <i class="fas fa-user-graduate me-1" style="color: var(--istinye-turquoise);"></i>
-                                    {{ g.student_name }}
-                                </td>
+                                <td>{{ g.student_name }}</td>
                                 <td>{{ g.course }}</td>
                                 <td class="text-center">
-                                    <span class="badge badge-student" style="font-size: 13px;">
-                                        {{ g.grade }}
-                                    </span>
+                                    <span class="badge badge-student" style="font-size: 13px;">{{ g.grade }}</span>
                                 </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-
-                    <div class="alert alert-info small mb-0">
-                        <i class="fas fa-shield-alt me-1"></i>
-                        Grades are stored encrypted (Fernet/AES) and decrypted for authorized viewing only.
-                    </div>
                 {% else %}
                     <div class="text-center py-5">
-                        <i class="fas fa-clipboard fa-3x text-muted mb-3"></i>
                         <p class="text-muted">You haven't recorded any grades yet.</p>
                     </div>
                 {% endif %}
@@ -105,4 +81,4 @@
         </div>
     </div>
 </div>
-{% endblock %} 
+{% endblock %}

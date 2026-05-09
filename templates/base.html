@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}University Security System{% endblock %}</title>
+    <title>{% block title %}Abdulilah University{% endblock %}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -86,8 +86,19 @@
         footer {
             background: var(--istinye-dark-blue);
             color: white;
-            padding: 20px 0;
+            padding: 25px 0;
             margin-top: 50px;
+        }
+
+        .lead-developer {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .team-members {
+            font-size: 14px;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -96,8 +107,7 @@
 <nav class="navbar navbar-expand-lg navbar-istinye">
     <div class="container">
         <a class="navbar-brand" href="{{ url_for('home') }}">
-            <i class="fas fa-shield-alt me-2"></i>
-            Istinye University Portal
+            Abdulilah University
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
@@ -107,31 +117,22 @@
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <span class="nav-link">
-                            <i class="fas fa-user-circle me-1"></i>
                             {{ current_user.full_name }}
                             <span class="badge badge-{{ current_user.role }} ms-1">{{ current_user.role|upper }}</span>
                         </span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">
-                            <i class="fas fa-sign-out-alt me-1"></i>Logout
-                        </a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">
-                            <i class="fas fa-sign-in-alt me-1"></i>Login
-                        </a>
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('register') }}">
-                            <i class="fas fa-user-plus me-1"></i>Register
-                        </a>
+                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                     </li>
                 {% endif %}
             </ul>
@@ -156,8 +157,8 @@
 
 <footer class="text-center mt-5">
     <div class="container">
-        <p class="mb-1"><i class="fas fa-graduation-cap me-2"></i>Istinye University - SWE210 Software Security</p>
-        <small>Secure Web Application Project &copy; 2026</small>
+        <p class="lead-developer mb-2">Developed by Abdulilah Alrifai</p>
+        <p class="team-members mb-0">Taher Alshawaf &nbsp;|&nbsp; Ghaith Azizieh</p>
     </div>
 </footer>
 
