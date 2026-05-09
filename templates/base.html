@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Abdulilah University{% endblock %}</title>
+    <title>{% block title %}Manonmaniam Sundaranar University{% endblock %}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -34,6 +34,14 @@
 
         .navbar-istinye .nav-link:hover {
             color: var(--istinye-light) !important;
+        }
+
+        .navbar-logo {
+            height: 40px;
+            margin-right: 10px;
+            background: white;
+            padding: 4px;
+            border-radius: 6px;
         }
 
         .btn-istinye {
@@ -106,8 +114,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-istinye">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('home') }}">
-            Abdulilah University
+        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="navbar-logo">
+            Manonmaniam Sundaranar University
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
