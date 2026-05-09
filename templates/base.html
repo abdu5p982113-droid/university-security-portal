@@ -36,14 +36,6 @@
             color: var(--istinye-light) !important;
         }
 
-        .navbar-logo {
-            height: 40px;
-            margin-right: 10px;
-            background: white;
-            padding: 4px;
-            border-radius: 6px;
-        }
-
         .btn-istinye {
             background-color: var(--istinye-turquoise);
             border-color: var(--istinye-turquoise);
@@ -114,8 +106,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-istinye">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="navbar-logo">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
             Manonmaniam Sundaranar University
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
