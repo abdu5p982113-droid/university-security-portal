@@ -105,10 +105,25 @@ def role_required(*allowed_roles):
     return decorator
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
+
+    if request.method == 'POST':
+        email = request.form.get('email').strip().lower()
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.check_password(password):
+            login_user(user)
+            flash(f'Welcome back, {user.full_name}!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid email or password.', 'danger')
+            return redirect(url_for('home'))
+
     return render_template('home.html')
 
 

@@ -4,20 +4,36 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-10">
-        <div class="card card-istinye text-center p-5 mt-4">
-            <div class="card-body">
-                <h1 class="mt-4 mb-3" style="color: var(--istinye-dark-blue);">
-                    Manonmaniam Sundaranar University
-                </h1>
-                <p class="lead text-muted mb-5">
-                    A secure platform for managing academic records
-                </p>
+    <div class="col-md-5">
+        <div class="card card-istinye mt-4">
+            <div class="card-header text-center py-3">
+                Sign In to Your Account
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" required
+                               placeholder="your.email@example.com">
+                    </div>
 
-                <div class="mt-5">
-                    <a href="{{ url_for('login') }}" class="btn btn-istinye btn-lg me-2 px-4">Login</a>
-                    <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
-                </div>
+                    <div class="mb-4">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required
+                               placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-istinye w-100 py-2">Login</button>
+                </form>
+
+                <hr class="my-4">
+
+                <p class="text-center text-muted mb-0">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}" style="color: var(--istinye-turquoise); font-weight: 500;">
+                        Register here
+                    </a>
+                </p>
             </div>
         </div>
     </div>
