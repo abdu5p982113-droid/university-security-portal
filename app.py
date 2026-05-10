@@ -394,3 +394,31 @@ def security_view():
     return render_template('security_view.html',
                            users=users_comparison,
                            grades=grades_comparison)
+
+
+def initialize_database():
+    with app.app_context():
+        db.create_all()
+
+        if not User.query.filter_by(role='admin').first():
+            default_admin = User(
+                username='admin',
+                email='admin_abdulilah@istinye.edu.tr',
+                full_name='Abdulilah Admin',
+                department='IT Administration',
+                role='admin',
+                national_id_encrypted=encrypt_data('00000000000'),
+                phone_encrypted=encrypt_data('+90 000 000 0000')
+            )
+            default_admin.set_password('Admin@123')
+            db.session.add(default_admin)
+            db.session.commit()
+            print('Default admin created: admin_abdulilah@istinye.edu.tr / Admin@123')
+
+
+with app.app_context():
+    initialize_database()
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
