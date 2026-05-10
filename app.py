@@ -400,20 +400,29 @@ def initialize_database():
     with app.app_context():
         db.create_all()
 
-        if not User.query.filter_by(role='admin').first():
+        admin = User.query.filter_by(role='admin').first()
+
+        if not admin:
             default_admin = User(
-                username='admin',
+                username='ABDULILAH',
                 email='admin_abdulilah@istinye.edu.tr',
-                full_name='Abdulilah Admin',
+                full_name='Abdulilah AL RIFAI',
                 department='IT Administration',
                 role='admin',
-                national_id_encrypted=encrypt_data('00000000000'),
-                phone_encrypted=encrypt_data('+90 000 000 0000')
+                national_id_encrypted=encrypt_data('2309116154'),
+                phone_encrypted=encrypt_data('91111918')
             )
-            default_admin.set_password('Admin@123')
+            default_admin.set_password('Admin@2002')
             db.session.add(default_admin)
             db.session.commit()
-            print('Default admin created: admin_abdulilah@istinye.edu.tr / Admin@123')
+            print('Default admin created: admin_abdulilah@istinye.edu.tr / Admin@2002')
+        else:
+            current_id = admin.get_national_id()
+            if current_id == '00000000000':
+                admin.national_id_encrypted = encrypt_data('2309116154')
+                admin.phone_encrypted = encrypt_data('91111918')
+                db.session.commit()
+                print('Admin data updated with real values')
 
 
 with app.app_context():
