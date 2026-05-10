@@ -10,14 +10,9 @@
     </div>
 </div>
 
-<div class="alert alert-warning mt-3">
-    <strong>What you see here:</strong> A side-by-side comparison between the data shown to users
-    and what is actually stored in the database. Notice how passwords are hashed and sensitive data is encrypted.
-</div>
-
 <div class="card card-istinye mt-4">
     <div class="card-header">
-        Users Table - Encryption Demonstration
+        Users Table
         <span class="badge bg-light text-dark ms-2">{{ users|length }} users</span>
     </div>
     <div class="card-body p-0">
@@ -27,13 +22,13 @@
                     <tr>
                         <th rowspan="2" class="align-middle">User</th>
                         <th colspan="2" class="text-center" style="background-color: #d1ecf1;">
-                            Password (Hashing)
+                            Password
                         </th>
                         <th colspan="2" class="text-center" style="background-color: #fff3cd;">
-                            National ID (Encryption)
+                            National ID
                         </th>
                         <th colspan="2" class="text-center" style="background-color: #f8d7da;">
-                            Phone (Encryption)
+                            Phone
                         </th>
                     </tr>
                     <tr>
@@ -56,13 +51,9 @@
 
                         <td class="text-center align-middle">
                             <code style="color: green;">●●●●●●●</code>
-                            <br>
-                            <small class="text-muted">(hidden)</small>
                         </td>
                         <td class="align-middle" style="word-break: break-all; max-width: 250px;">
                             <code style="font-size: 11px; color: #d63384;">{{ u.password_hash_raw[:60] }}...</code>
-                            <br>
-                            <small class="badge bg-info mt-1">Hashed</small>
                         </td>
 
                         <td class="text-center align-middle">
@@ -72,8 +63,6 @@
                             <code style="font-size: 11px; color: #d63384;">
                                 {% if u.national_id_raw %}{{ u.national_id_raw[:50] }}...{% else %}-{% endif %}
                             </code>
-                            <br>
-                            <small class="badge bg-warning text-dark mt-1">Encrypted</small>
                         </td>
 
                         <td class="text-center align-middle">
@@ -83,8 +72,6 @@
                             <code style="font-size: 11px; color: #d63384;">
                                 {% if u.phone_raw %}{{ u.phone_raw[:50] }}...{% else %}-{% endif %}
                             </code>
-                            <br>
-                            <small class="badge bg-danger mt-1">Encrypted</small>
                         </td>
                     </tr>
                     {% endfor %}
@@ -96,7 +83,7 @@
 
 <div class="card card-istinye mt-4">
     <div class="card-header">
-        Grades Table - Encryption Demonstration
+        Grades Table
         <span class="badge bg-light text-dark ms-2">{{ grades|length }} grades</span>
     </div>
     <div class="card-body p-0">
@@ -107,8 +94,8 @@
                     <tr>
                         <th>Student</th>
                         <th>Course</th>
-                        <th class="text-center" style="background-color: #d4edda;">Grade (User Sees)</th>
-                        <th class="text-center" style="background-color: #f8d7da;">Grade (In Database)</th>
+                        <th class="text-center" style="background-color: #d4edda;">User Sees</th>
+                        <th class="text-center" style="background-color: #f8d7da;">In Database</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,8 +108,6 @@
                         </td>
                         <td class="align-middle" style="word-break: break-all; max-width: 350px;">
                             <code style="font-size: 11px; color: #d63384;">{{ g.grade_raw[:60] }}...</code>
-                            <br>
-                            <small class="badge bg-warning text-dark mt-1">Encrypted</small>
                         </td>
                     </tr>
                     {% endfor %}
@@ -131,39 +116,9 @@
         </div>
         {% else %}
         <div class="text-center py-4">
-            <p class="text-muted">No grades recorded yet. Add some grades from the teacher dashboard.</p>
+            <p class="text-muted">No grades recorded yet.</p>
         </div>
         {% endif %}
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card card-istinye">
-            <div class="card-body text-center">
-                <h6 class="text-muted">Hashing Algorithm</h6>
-                <h5 style="color: var(--istinye-turquoise);">Werkzeug</h5>
-                <small class="text-muted">PBKDF2 / Scrypt with SHA-256</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card card-istinye">
-            <div class="card-body text-center">
-                <h6 class="text-muted">Encryption Algorithm</h6>
-                <h5 style="color: var(--istinye-turquoise);">Fernet (AES-128)</h5>
-                <small class="text-muted">Symmetric encryption with HMAC</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card card-istinye">
-            <div class="card-body text-center">
-                <h6 class="text-muted">Key Storage</h6>
-                <h5 style="color: var(--istinye-turquoise);">encryption_key.key</h5>
-                <small class="text-muted">Stored separately from database</small>
-            </div>
-        </div>
     </div>
 </div>
 
