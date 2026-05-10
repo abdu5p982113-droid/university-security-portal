@@ -15,10 +15,21 @@
             --istinye-light: #E8F7F9;
         }
 
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
             background-color: #f5f7fa;
             font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
+        }
+
+        main.content-wrapper {
+            flex: 1 0 auto;
         }
 
         .navbar-istinye {
@@ -87,7 +98,7 @@
             background: var(--istinye-dark-blue);
             color: white;
             padding: 25px 0;
-            margin-top: 50px;
+            flex-shrink: 0;
         }
 
         .lead-developer {
@@ -140,20 +151,22 @@
     </div>
 </nav>
 
-<div class="container mt-4">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+<main class="content-wrapper">
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    {% block content %}{% endblock %}
-</div>
+        {% block content %}{% endblock %}
+    </div>
+</main>
 
 <footer class="text-center mt-5">
     <div class="container">
